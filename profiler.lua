@@ -46,22 +46,27 @@ end
 
 ---@class Zingle.Profiler
 ---
----@field instruction_count number
----@field last_instruction_count number
+---@field protected instruction_count number
+---@field protected last_instruction_count number
 ---
----@field main_fn Zingle.Profiler.CallstackItem
+---@field protected main_fn Zingle.Profiler.CallstackItem
 ---
----@field methods table<function, string>
----@field discovered table<table, true>
+---@field protected methods table<function, string>
+---@field protected discovered table<table, true>
 ---
----@field callstack Zingle.Profiler.CallstackItem[]
----@field functions table<function, Zingle.Profiler.Function>
----@field ignore table<function, true>
+---@field protected callstack Zingle.Profiler.CallstackItem[]
+---@field protected functions table<function, Zingle.Profiler.Function>
+---@field protected ignore table<function, true>
 ---
----@field ignore_paths string[]
+---@field protected ignore_paths string[]
+---
+---@field start fun(opts?: { sentient: boolean?, ignore?: string[] })
+---@field ignore_path fun(...: string)
+---@field reset fun(opts?: { sentient: boolean?, ignore?: string[] })
+---@field stop fun()
+---@field dump fun(filename: string, format: "callgrind")
 local profiler = {}
 
----@param opts { sentient: boolean?, ignore: string[]? }?
 function profiler.reset(opts)
     opts = opts or {}
 
@@ -261,7 +266,6 @@ function profiler.trace(class)
     end
 end
 
----@param opts { sentient: boolean?, ignore: string[]? }?
 function profiler.start(opts)
     profiler.reset(opts)
 

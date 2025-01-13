@@ -1,0 +1,9 @@
+--- An annotation for use with lua-language-server
+--- https://github.com/LuaLS/lua-language-server
+---
+---@class Zingle.Profiler
+---@field start fun(opts?: { sentient: boolean?, ignore?: string[] })
+---@field ignore_path fun(...: string)
+---@field reset fun(opts?: { sentient: boolean?, ignore?: string[] })
+---@field stop fun()
+---@field dump fun(filename: string, format: "callgrind")
